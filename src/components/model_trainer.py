@@ -31,13 +31,13 @@ class ModelTrainer:
                 test_array[:,-1]
             )
             models = {
-                "RandomForestRegressor()":RandomForestRegressor(),
-                "DecisionTreeRegressore()": DecisionTreeRegressor(),
-                "GradientBoostingRegressor()":GradientBoostingRegressor(),
-                "LinearRegression()": LinearRegression(),
-                "KNeighborsRegresso()": KNeighborsRegressor(),
-                "XGBRegressorr()":XGBRegressor(),
-                "AdaBoostRegressor()": AdaBoostRegressor()
+                "Random Forest": RandomForestRegressor(),
+                "Decision Tree": DecisionTreeRegressor(),
+                "Gradient Boosting": GradientBoostingRegressor(),
+                "Linear Regression": LinearRegression(),
+                "XGBRegressor": XGBRegressor(),
+                "CatBoosting Regressor": CatBoostRegressor(verbose=False),
+                "AdaBoost Regressor": AdaBoostRegressor(),
             }
             model_report:dict = evaluate_models(x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,models=models)
             

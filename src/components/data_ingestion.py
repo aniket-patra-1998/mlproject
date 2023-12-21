@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainerConfig,ModelTrainer
 
 @dataclass
 class DataIngestionConfig:
@@ -48,10 +49,26 @@ class DataIngestion:
             return CustomException(e,sys)
         
 if __name__ == "__main__":
+    #Step 1 : Data ingestion here training and test data will be saved a s.csv file
     data_ingestion = DataIngestion()
     train_data,test_data = data_ingestion.initiate_data_ingestion()
 
+
+    #Step 2 : Data transformation step. Here numerical and categorical variables are 
+    # transformed and are divided into train set and test set  with the data from step 1
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+
+
+    # Step 3: Model trainer. Here different models are trained on the train and test set from step 2 and they are evaluated based on R2 
+    # score and the best model is saved as .pkl file.
+    #Also returns the r2 score for the best model
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_training(train_arr,test_arr))
+
+
+
+
 
 
